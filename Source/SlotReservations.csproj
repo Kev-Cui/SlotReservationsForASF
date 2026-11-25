@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <!--
     Build per game version:
-      dotnet build -c Release -p:RWVersion=1.7   (default) -> ..\1.7\Assemblies
-      dotnet build -c Release -p:RWVersion=1.6             -> ..\1.6\Assemblies
+      dotnet build -c Release -p:RWVersion=1.7   (default) -> ..\Mod\1.7\Assemblies
+      dotnet build -c Release -p:RWVersion=1.6             -> ..\Mod\1.6\Assemblies
 
     1.7: the test branch runs on a .NET 10 based runtime (Waylith), not Unity/Mono.
          We compile against the installed game's Assembly-CSharp + UnityStubs (UnityEngine* is redirected there).
@@ -15,7 +15,7 @@
     <Nullable>disable</Nullable>
     <AssemblyName>SlotReservations</AssemblyName>
     <RootNamespace>SlotReservations</RootNamespace>
-    <OutputPath>..\$(RWVersion)\Assemblies\</OutputPath>
+    <OutputPath>..\Mod\$(RWVersion)\Assemblies\</OutputPath>
     <IntermediateOutputPath>obj\$(RWVersion)\</IntermediateOutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <GenerateDocumentationFile>false</GenerateDocumentationFile>

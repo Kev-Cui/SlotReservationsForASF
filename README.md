@@ -29,7 +29,13 @@ Works with [Adaptive Storage Framework](https://steamcommunity.com/sharedfiles/f
 
 ## Installation
 
-Clone or download this repository into `RimWorld/Mods/` and enable **Slot Reservations for Adaptive Storage** in the mod list. Prebuilt assemblies are included in `1.6/Assemblies` and `1.7/Assemblies`.
+The playable mod is the `Mod/` folder. Copy it into `RimWorld/Mods/` (rename it if you like, e.g. `SlotReservations`) and enable **Slot Reservations for Adaptive Storage** in the mod list. Prebuilt assemblies are included in `Mod/1.6/Assemblies` and `Mod/1.7/Assemblies`.
+
+For development, keep the repository anywhere and link the mod folder into the game instead of copying it:
+
+```powershell
+New-Item -ItemType Junction -Path "<RimWorld>\Mods\SlotReservations" -Target "<repo>\Mod"
+```
 
 ## Building from source
 
@@ -37,8 +43,8 @@ The project targets `net48` and needs the .NET SDK.
 
 ```powershell
 cd Source
-dotnet build -c Release -p:RWVersion=1.7   # -> 1.7/Assemblies (default)
-dotnet build -c Release -p:RWVersion=1.6   # -> 1.6/Assemblies
+dotnet build -c Release -p:RWVersion=1.7   # -> Mod/1.7/Assemblies (default)
+dotnet build -c Release -p:RWVersion=1.6   # -> Mod/1.6/Assemblies
 ```
 
 - **1.7** compiles against the installed game's `Assembly-CSharp.dll` and `UnityStubs.dll`, because the 1.7 test branch runs on a .NET 10 based runtime.
@@ -46,6 +52,16 @@ dotnet build -c Release -p:RWVersion=1.6   # -> 1.6/Assemblies
 - Both versions reference ASF's 1.6 `AdaptiveStorageFramework.dll` and `Lib.Harmony` (compile-time only).
 
 Set `RimWorldDir` and `AsfDir` in [Source/SlotReservations.csproj](Source/SlotReservations.csproj) to match your install paths.
+
+## Publishing to the Steam Workshop
+
+RimWorld uploads the whole mod folder with nothing excluded. Only `Mod/` is the mod, so source code, the README and `.git` stay out of the upload. Before uploading:
+
+```powershell
+.\Source\prepare-upload.ps1
+```
+
+This rebuilds both DLLs into `Mod/`, checks `About.xml` and `Preview.png`, and lists the files that will be uploaded. Then enable Dev Mode, open the mod list, select this mod and click **Upload to Steam Workshop**. The game has to load the mod from `Mod/` (through the junction above) for this. After the first upload the game writes `Mod/About/PublishedFileId.txt`. Commit that file so later uploads update the same Workshop item.
 
 ## How it works
 
@@ -61,9 +77,11 @@ Set `RimWorldDir` and `AsfDir` in [Source/SlotReservations.csproj](Source/SlotRe
 ## Source layout
 
 ```
-About/                 Mod metadata
-1.6/Assemblies/        Built DLL for RimWorld 1.6
-1.7/Assemblies/        Built DLL for RimWorld 1.7
-Languages/             Keyed translations
-Source/                C# source and project file
+Mod/                   The mod itself (this folder is what gets uploaded)
+  About/               Metadata, preview image, mod icon
+  1.6/Assemblies/      Built DLL for RimWorld 1.6
+  1.7/Assemblies/      Built DLL for RimWorld 1.7
+  Languages/           Keyed translations
+Source/                C# source, project file, upload helper script
+README.md
 ```

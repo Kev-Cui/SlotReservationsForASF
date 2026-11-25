@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+	<name>Slot Reservations for Adaptive Storage</name>
+	<author>原神高手</author>
+	<packageId>slotreservations.asf</packageId>
+	<modVersion>1.0.0</modVersion>
+	<url>https://github.com/Kev-Cui/SlotReservationsForASF</url>
+	<supportedVersions>
+		<li>1.6</li>
+		<li>1.7</li>
+	</supportedVersions>
+	<description>Reserve stack slots in a storage building for specific items.
+
+Example: a shelf with 8 slots keeps 2 slots for meat and 2 for vegetables. The other 4 slots follow the building's normal storage filter. Other items can't take the reserved slots, so the food you care about always has room.
+
+Works with Adaptive Storage Framework buildings and vanilla shelves (Building_Storage). ASF is optional.
+
+Features:
+- Slot rules gizmo on every storage building. Each rule is a thing filter plus a slot count.
+- Copy / paste rules between buildings.
+- Inspect pane shows reserved slots and how many stacks still need to move out.
+- Stacks that break the rules are hauled to other storage. If nothing else accepts them, or they stay stuck for about 2 in-game hours, they are dropped next to the building.
+- Hauler-aware: items already on their way count toward slots, so haulers don't overfill. Supports vanilla hauling and Pick Up and Haul.
+- Translations: English, Simplified Chinese, Traditional Chinese.
+
+Requires Harmony. Load after Adaptive Storage Framework if you use it.
+
+Source: https://github.com/Kev-Cui/SlotReservationsForASF</description>
+	<modDependencies>
+		<li>
+			<packageId>brrainz.harmony</packageId>
+			<displayName>Harmony</displayName>
+			<steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+			<downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+		</li>
+	</modDependencies>
+	<loadAfter>
+		<li>brrainz.harmony</li>
+		<li>Ludeon.RimWorld</li>
+		<li>adaptive.storage.framework</li>
+	</loadAfter>
+</ModMetaData>
