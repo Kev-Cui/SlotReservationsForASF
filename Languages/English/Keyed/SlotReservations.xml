@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- Gizmos -->
+  <SR_SlotRules>Slot rules</SR_SlotRules>
+  <SR_SlotRulesDesc>Reserve stack slots for specific items.\nReserved: {0} / {1} slots.</SR_SlotRulesDesc>
+  <SR_CopyRules>Copy slot rules</SR_CopyRules>
+  <SR_PasteRules>Paste slot rules</SR_PasteRules>
+  <SR_ClipboardEmpty>Clipboard is empty.</SR_ClipboardEmpty>
+
+  <!-- Inspect pane -->
+  <SR_InspectReserved>Reserved slots: {0} / {1}</SR_InspectReserved>
+  <SR_InspectToMoveOut>Stacks to move out (make room for reserved slots): {0}</SR_InspectToMoveOut>
+
+  <!-- Slot rules window -->
+  <SR_DialogTitle>Slot rules: {0}</SR_DialogTitle>
+  <SR_DialogSummary>Reserved {0} / {1} slots. Unreserved: {2} (normal filter). Stored stacks: {3}</SR_DialogSummary>
+  <SR_AddRule>Add rule</SR_AddRule>
+  <SR_FilterFor>Filter for rule ({0} slots):</SR_FilterFor>
+  <SR_SelectOrAdd>Select or add a rule.</SR_SelectOrAdd>
+  <SR_Nothing>(nothing)</SR_Nothing>
+
+</LanguageData>

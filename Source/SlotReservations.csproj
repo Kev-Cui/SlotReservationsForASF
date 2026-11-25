@@ -1,0 +1,44 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Build per game version:
+      dotnet build -c Release -p:RWVersion=1.7   (default) -> ..\1.7\Assemblies
+      dotnet build -c Release -p:RWVersion=1.6             -> ..\1.6\Assemblies
+
+    1.7: the test branch runs on a .NET 10 based runtime (Waylith), not Unity/Mono.
+         We compile against the installed game's Assembly-CSharp + UnityStubs (UnityEngine* is redirected there).
+    1.6: compiled against Krafs.Rimworld.Ref 1.6 reference assemblies (Unity/Mono), as if 1.7 did not exist.
+  -->
+  <PropertyGroup>
+    <RWVersion Condition="'$(RWVersion)' == ''">1.7</RWVersion>
+    <TargetFramework>net48</TargetFramework> <!-- ASF is built for net48 -->
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>SlotReservations</AssemblyName>
+    <RootNamespace>SlotReservations</RootNamespace>
+    <OutputPath>..\$(RWVersion)\Assemblies\</OutputPath>
+    <IntermediateOutputPath>obj\$(RWVersion)\</IntermediateOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <DebugType>none</DebugType>
+    <RimWorldDir>D:\SteamLibrary\steamapps\common\RimWorld</RimWorldDir>
+    <AsfDir>D:\SteamLibrary\steamapps\workshop\content\294100\3033901359</AsfDir>
+  </PropertyGroup>
+
+  <!-- 1.7: installed game -->
+  <ItemGroup Condition="'$(RWVersion)' == '1.7'">
+    <Reference Include="Assembly-CSharp"><HintPath>$(RimWorldDir)\Assembly-CSharp.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="UnityStubs"><HintPath>$(RimWorldDir)\UnityStubs.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <!-- 1.6: reference assemblies from NuGet -->
+  <ItemGroup Condition="'$(RWVersion)' == '1.6'">
+    <PackageReference Include="Krafs.Rimworld.Ref" Version="1.6.4871" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- ASF has no 1.7 folder; its 1.6 build is what runs on both versions. -->
+    <Reference Include="AdaptiveStorageFramework"><HintPath>$(AsfDir)\1.6\Assemblies\AdaptiveStorageFramework.dll</HintPath><Private>false</Private></Reference>
+    <!-- Compile-time only; at runtime the Harmony mod's own 0Harmony is used. -->
+    <PackageReference Include="Lib.Harmony" Version="2.3.6" ExcludeAssets="runtime" />
+  </ItemGroup>
+</Project>

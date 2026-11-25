@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 按鈕 -->
+  <SR_SlotRules>欄位規則</SR_SlotRules>
+  <SR_SlotRulesDesc>為特定物品預留堆疊欄位。\n已預留：{0} / {1}個欄位。</SR_SlotRulesDesc>
+  <SR_CopyRules>複製欄位規則</SR_CopyRules>
+  <SR_PasteRules>貼上欄位規則</SR_PasteRules>
+  <SR_ClipboardEmpty>剪貼簿是空的。</SR_ClipboardEmpty>
+
+  <!-- 檢視面板 -->
+  <SR_InspectReserved>已預留欄位：{0} / {1}</SR_InspectReserved>
+  <SR_InspectToMoveOut>待移出的物品堆（為預留欄位騰出空間）：{0}</SR_InspectToMoveOut>
+
+  <!-- 欄位規則視窗 -->
+  <SR_DialogTitle>欄位規則：{0}</SR_DialogTitle>
+  <SR_DialogSummary>已預留{0} / {1}個欄位。未預留：{2}個（依一般篩選）。已存放：{3}堆</SR_DialogSummary>
+  <SR_AddRule>新增規則</SR_AddRule>
+  <SR_FilterFor>此規則的篩選（{0}個欄位）：</SR_FilterFor>
+  <SR_SelectOrAdd>請選擇或新增一條規則。</SR_SelectOrAdd>
+  <SR_Nothing>（無）</SR_Nothing>
+
+</LanguageData>

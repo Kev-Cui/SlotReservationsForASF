@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <!-- 按钮 -->
+  <SR_SlotRules>栏位规则</SR_SlotRules>
+  <SR_SlotRulesDesc>为特定物品预留堆叠栏位。\n已预留：{0} / {1}个栏位。</SR_SlotRulesDesc>
+  <SR_CopyRules>复制栏位规则</SR_CopyRules>
+  <SR_PasteRules>粘贴栏位规则</SR_PasteRules>
+  <SR_ClipboardEmpty>剪贴板为空。</SR_ClipboardEmpty>
+
+  <!-- 检视面板 -->
+  <SR_InspectReserved>已预留栏位：{0} / {1}</SR_InspectReserved>
+  <SR_InspectToMoveOut>待移出的物品堆（为预留栏位腾出空间）：{0}</SR_InspectToMoveOut>
+
+  <!-- 栏位规则窗口 -->
+  <SR_DialogTitle>栏位规则：{0}</SR_DialogTitle>
+  <SR_DialogSummary>已预留{0} / {1}个栏位。未预留：{2}个（使用常规筛选）。已存放：{3}堆</SR_DialogSummary>
+  <SR_AddRule>添加规则</SR_AddRule>
+  <SR_FilterFor>该规则的筛选（{0}个栏位）：</SR_FilterFor>
+  <SR_SelectOrAdd>请选择或添加一条规则。</SR_SelectOrAdd>
+  <SR_Nothing>（无）</SR_Nothing>
+
+</LanguageData>
