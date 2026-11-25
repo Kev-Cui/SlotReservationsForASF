@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
 	<name>Slot Reservations for Adaptive Storage</name>
-	<author>SlotReservations</author>
+	<author>原神高手</author>
 	<packageId>slotreservations.asf</packageId>
 	<description>Reserve a number of stack slots in a storage building for specific items (e.g. 2 slots Meat, 2 slots Vegetables, rest = normal filter). Works with Adaptive Storage Framework buildings and vanilla Building_Storage.</description>
 	<supportedVersions>
