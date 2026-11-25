@@ -29,12 +29,12 @@ Works with [Adaptive Storage Framework](https://steamcommunity.com/sharedfiles/f
 
 ## Installation
 
-The playable mod is the `Mod/` folder. Copy it into `RimWorld/Mods/` (rename it if you like, e.g. `SlotReservations`) and enable **Slot Reservations for Adaptive Storage** in the mod list. Prebuilt assemblies are included in `Mod/1.6/Assemblies` and `Mod/1.7/Assemblies`.
+The mod is the `SlotReservationsForASF/` folder inside this repository. Copy that folder into `RimWorld/Mods/` and enable **Slot Reservations for Adaptive Storage** in the mod list. Prebuilt assemblies are included in its `1.6/Assemblies` and `1.7/Assemblies`.
 
 For development, keep the repository anywhere and link the mod folder into the game instead of copying it:
 
 ```powershell
-New-Item -ItemType Junction -Path "<RimWorld>\Mods\SlotReservations" -Target "<repo>\Mod"
+New-Item -ItemType Junction -Path "<RimWorld>\Mods\SlotReservationsForASF" -Target "<repo>\SlotReservationsForASF"
 ```
 
 ## Building from source
@@ -42,26 +42,26 @@ New-Item -ItemType Junction -Path "<RimWorld>\Mods\SlotReservations" -Target "<r
 The project targets `net48` and needs the .NET SDK.
 
 ```powershell
-cd Source
-dotnet build -c Release -p:RWVersion=1.7   # -> Mod/1.7/Assemblies (default)
-dotnet build -c Release -p:RWVersion=1.6   # -> Mod/1.6/Assemblies
+cd SlotReservationsForASF\Source
+dotnet build -c Release -p:RWVersion=1.7   # -> SlotReservationsForASF/1.7/Assemblies (default)
+dotnet build -c Release -p:RWVersion=1.6   # -> SlotReservationsForASF/1.6/Assemblies
 ```
 
 - **1.7** compiles against the installed game's `Assembly-CSharp.dll` and `UnityStubs.dll`, because the 1.7 test branch runs on a .NET 10 based runtime.
 - **1.6** compiles against the `Krafs.Rimworld.Ref` 1.6 reference assemblies from NuGet.
 - Both versions reference ASF's 1.6 `AdaptiveStorageFramework.dll` and `Lib.Harmony` (compile-time only).
 
-Set `RimWorldDir` and `AsfDir` in [Source/SlotReservations.csproj](Source/SlotReservations.csproj) to match your install paths.
+Set `RimWorldDir` and `AsfDir` in [SlotReservations.csproj](SlotReservationsForASF/Source/SlotReservations.csproj) to match your install paths.
 
 ## Publishing to the Steam Workshop
 
-RimWorld uploads the whole mod folder with nothing excluded. Only `Mod/` is the mod, so source code, the README and `.git` stay out of the upload. Before uploading:
+RimWorld uploads the whole mod folder with nothing excluded. Only `SlotReservationsForASF/` is uploaded (including its `Source/`). The README, `.git` and `Resources/` stay outside it. `Resources/` holds screenshots for the Workshop page, which you add on Steam by hand. Before uploading:
 
 ```powershell
-.\Source\prepare-upload.ps1
+.\SlotReservationsForASF\Source\prepare-upload.ps1
 ```
 
-This rebuilds both DLLs into `Mod/`, checks `About.xml` and `Preview.png`, and lists the files that will be uploaded. Then enable Dev Mode, open the mod list, select this mod and click **Upload to Steam Workshop**. The game has to load the mod from `Mod/` (through the junction above) for this. After the first upload the game writes `Mod/About/PublishedFileId.txt`. Commit that file so later uploads update the same Workshop item.
+This rebuilds both DLLs, deletes `Source/obj` and `Source/bin`, checks `About.xml` and `Preview.png`, and lists the files that will be uploaded. Then enable Dev Mode, open the mod list, select this mod and click **Upload to Steam Workshop**. The game has to load the mod from `SlotReservationsForASF/` (for example through the junction above) for this. After the first upload the game writes `About/PublishedFileId.txt`. Commit that file so later uploads update the same Workshop item.
 
 ## How it works
 
@@ -77,11 +77,12 @@ This rebuilds both DLLs into `Mod/`, checks `About.xml` and `Preview.png`, and l
 ## Source layout
 
 ```
-Mod/                   The mod itself (this folder is what gets uploaded)
-  About/               Metadata, preview image, mod icon
-  1.6/Assemblies/      Built DLL for RimWorld 1.6
-  1.7/Assemblies/      Built DLL for RimWorld 1.7
-  Languages/           Keyed translations
-Source/                C# source, project file, upload helper script
+SlotReservationsForASF/   The mod itself (this folder is what gets uploaded)
+  About/                 Metadata, preview image, mod icon
+  1.6/Assemblies/        Built DLL for RimWorld 1.6
+  1.7/Assemblies/        Built DLL for RimWorld 1.7
+  Languages/             Keyed translations
+  Source/                C# source, project file, upload helper script
+Resources/               Screenshots for the Workshop page (not uploaded)
 README.md
 ```

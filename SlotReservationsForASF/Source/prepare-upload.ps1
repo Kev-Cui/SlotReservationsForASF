@@ -1,13 +1,17 @@
 # Run before "Upload/Update on Steam Workshop" in RimWorld.
-# RimWorld uploads the whole mod folder (Mod/) as-is, so this rebuilds the DLLs
-# into it, checks the metadata and lists what will be uploaded.
+# RimWorld uploads the whole mod folder as-is, so this rebuilds the DLLs,
+# deletes build intermediates and lists what will be uploaded.
 $ErrorActionPreference = 'Stop'
 $src = $PSScriptRoot
-$mod = Join-Path (Split-Path $src -Parent) 'Mod'
+$mod = Split-Path $src -Parent
 
 foreach ($v in '1.6', '1.7') {
     dotnet build "$src\SlotReservations.csproj" -c Release -p:RWVersion=$v -nologo -v q
     if ($LASTEXITCODE -ne 0) { throw "Build failed for $v" }
+}
+
+foreach ($d in 'obj', 'bin') {
+    if (Test-Path "$src\$d") { Remove-Item "$src\$d" -Recurse -Force }
 }
 
 [xml](Get-Content "$mod\About\About.xml" -Raw -Encoding UTF8) | Out-Null
